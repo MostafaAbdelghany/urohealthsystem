@@ -40,10 +40,10 @@
             var variables = snapshot.val();
 
             // Update the values on the web page
-            document.getElementById('pH').textContent = variables.var1;
-            document.getElementById('Temperature').textContent = variables.var2;
-            document.getElementById('Turbidity').textContent = variables.var3;
-            document.getElementById('Ammonia').textContent = variables.var4;
+            document.getElementById('var1').textContent = variables.pH;
+            document.getElementById('var2').textContent = variables.Temperature;
+            document.getElementById('var3').textContent = variables.Turbidity;
+            document.getElementById('var4').textContent = variables.Ammonia;
         });
     </script>
 </body>
