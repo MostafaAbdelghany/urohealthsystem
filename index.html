@@ -35,7 +35,7 @@
         var database = firebase.database();
 
         // Listen for changes in the variables
-        var variablesRef = database.ref('Measurmnents');
+        var variablesRef = database.ref('Measurments');
         variablesRef.on('value', function(snapshot) {
             var variables = snapshot.val();
 
