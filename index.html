@@ -9,10 +9,10 @@
     <div>
         <h2>Variables:</h2>
         <ul>
-            <li><strong>Variable 1:</strong> <span id="var1"></span></li>
-            <li><strong>Variable 2:</strong> <span id="var2"></span></li>
-            <li><strong>Variable 3:</strong> <span id="var3"></span></li>
-            <li><strong>Variable 4:</strong> <span id="var4"></span></li>
+            <li><strong>pH:</strong> <span id="var1"></span></li>
+            <li><strong>Temperature:</strong> <span id="var2"></span></li>
+            <li><strong>Turbidity:</strong> <span id="var3"></span></li>
+            <li><strong>Ammonia:</strong> <span id="var4"></span></li>
         </ul>
     </div>
     
@@ -35,15 +35,15 @@
         var database = firebase.database();
 
         // Listen for changes in the variables
-        var variablesRef = database.ref('variables');
+        var variablesRef = database.ref('Measurmnents');
         variablesRef.on('value', function(snapshot) {
             var variables = snapshot.val();
 
             // Update the values on the web page
-            document.getElementById('var1').textContent = variables.var1;
-            document.getElementById('var2').textContent = variables.var2;
-            document.getElementById('var3').textContent = variables.var3;
-            document.getElementById('var4').textContent = variables.var4;
+            document.getElementById('pH').textContent = variables.var1;
+            document.getElementById('Temperature').textContent = variables.var2;
+            document.getElementById('Turbidity').textContent = variables.var3;
+            document.getElementById('Ammonia').textContent = variables.var4;
         });
     </script>
 </body>
