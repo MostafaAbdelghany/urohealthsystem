@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <title>Firebase Realtime Database Example</title>
+</head>
+<body>
+    <h1>Realtime Data from Firebase</h1>
+    
+    <div>
+        <h2>Variables:</h2>
+        <ul>
+            <li><strong>Variable 1:</strong> <span id="var1"></span></li>
+            <li><strong>Variable 2:</strong> <span id="var2"></span></li>
+            <li><strong>Variable 3:</strong> <span id="var3"></span></li>
+            <li><strong>Variable 4:</strong> <span id="var4"></span></li>
+        </ul>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.2.2/firebase-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.2.2/firebase-database.js"></script>
+    <script>
+        // Initialize Firebase
+        var firebaseConfig = {
+            // apiKey: "your-api-key",
+            // authDomain: "your-auth-domain",
+            databaseURL: "https://sensors-7d587-default-rtdb.firebaseio.com",
+            projectId: "sensors-7d587",
+            // storageBucket: "your-storage-bucket",
+            messagingSenderId: "208546809846",
+            // appId: "your-app-id"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the database
+        var database = firebase.database();
+
+        // Listen for changes in the variables
+        var variablesRef = database.ref('variables');
+        variablesRef.on('value', function(snapshot) {
+            var variables = snapshot.val();
+
+            // Update the values on the web page
+            document.getElementById('var1').textContent = variables.var1;
+            document.getElementById('var2').textContent = variables.var2;
+            document.getElementById('var3').textContent = variables.var3;
+            document.getElementById('var4').textContent = variables.var4;
+        });
+    </script>
+</body>
+</html>
