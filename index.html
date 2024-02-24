@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head itemscope="" itemtype="http://schema.org/WebSite">
@@ -12,19 +13,23 @@
 <body>
     <div id="snippetContent">
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
+        </script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         
-        <div class="container">
-            <h1>Realtime Data from Firebase</h1>
-            <div class="row">
+        <div class="container" style="margin-top: 87px;">
+            <div class="text-center">
+                <img src="logo.jpeg" alt="Logo" style="width: 200px; height: auto;">
+            </div>
+            <h1 class="text-center" style="margin-top: 20px;">Realtime Data from Sensors</h1>
+            <div class="row" style="margin-top: 50px;">
                 <div class="col-md-4 col-xl-3">
                     <div class="card bg-c-blue order-card">
                         <div class="card-block">
                             <h6 class="m-b-20">PH</h6>
                             <h2 class="text-right"><span id="var1"></span></h2>
+                            <p class="m-b-0 text-danger" id="warning1"></p>
                         </div>
                     </div>
                 </div>
@@ -32,7 +37,8 @@
                     <div class="card bg-c-green order-card">
                         <div class="card-block">
                             <h6 class="m-b-20">Temperature</h6>
-                            <h2 class="text-right"><span id="var2"></span></h2>
+                            <h2 class="text-right"><span id="var2"></span> °C</h2>
+                            <p class="m-b-0 text-danger" id="warning2"></p>
                         </div>
                     </div>
                 </div>
@@ -41,6 +47,7 @@
                         <div class="card-block">
                             <h6 class="m-b-20">Turbidity</h6>
                             <h2 class="text-right"><span id="var3"></span></h2>
+                            <p class="m-b-0 text-danger" id="warning3"></p>
                         </div>
                     </div>
                 </div>
@@ -48,7 +55,8 @@
                     <div class="card bg-c-pink order-card">
                         <div class="card-block">
                             <h6 class="m-b-20">Ammonia</h6>
-                            <h2 class="text-right"><span id="var4"></span></h2>
+                            <h2 class="text-right"><span id="var4"></span> mg/dL</h2>
+                            <p class="m-b-0 text-danger" id="warning4"></p>
                         </div>
                     </div>
                 </div>
@@ -137,20 +145,27 @@
         variablesRef.on('value', function(snapshot) {
             var variables = snapshot.val();
 
+            // Extract the data values
             let values = variables.values;
-            let parts = values.split(" "); // Split the string by space
+            let parts = values.split(" ");
 
-            // Extract each part into separate variables
-            let part1 = parseFloat(parts[0]); // Convert to float
-            let part2 = parseFloat(parts[1]);
-            let part3 = parseFloat(parts[2]);
-            let part4 = parseFloat(parts[3]);
+            // Convert data values to float
+            let ph = parseFloat(parts[0]);
+            let temperature = parseFloat(parts[1]);
+            let turbidity = parseFloat(parts[2]);
+            let ammonia = parseFloat(parts[3]);
 
-            // Update the values on the web page
-            document.getElementById('var1').innerHTML = part1;//variables.PH;
-            document.getElementById('var2').innerHTML = part2;//variables.Temperature;
-            document.getElementById('var3').innerHTML = part3;//variables.Turbidity;
-            document.getElementById('var4').innerHTML = part4;//variables.Ammonia;
+            // Update the displayed values
+            document.getElementById('var1').innerHTML = ph;
+            document.getElementById('var2').innerHTML = temperature;
+            document.getElementById('var3').innerHTML = turbidity;
+            document.getElementById('var4').innerHTML = ammonia;
+
+            // Update the warning messages
+            document.getElementById('warning1').innerHTML = (ph < 4.6 || ph > 8.0) ? "Warning: pH value out of range" : "";
+            document.getElementById('warning2').innerHTML = (temperature < 35 || temperature > 42) ? "Warning: Temperature value out of range" : "";
+            document.getElementById('warning3').innerHTML = ""; // No specific warning for turbidity
+            document.getElementById('warning4').innerHTML = (ammonia > 50) ? "Warning: Ammonia value exceeds maximum limit" : "";
         });
     </script>
 </body>
