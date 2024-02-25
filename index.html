@@ -148,10 +148,10 @@
             let Patient = variables.Patient;            
 
             // Update the displayed values
-            document.getElementById('var1').innerHTML = ph;
-            document.getElementById('var2').innerHTML = temperature;
+            document.getElementById('var1').innerHTML = round(ph,1);
+            document.getElementById('var2').innerHTML = round(temperature,1);
             document.getElementById('var3').innerHTML = turbidity;
-            document.getElementById('var4').innerHTML = ammonia;
+            document.getElementById('var4').innerHTML = round(ammonia,1);
             document.getElementById('var5').innerHTML = 'Welcome ' + Patient;
              
 
