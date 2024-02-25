@@ -146,14 +146,19 @@
             var variables = snapshot.val();
 
             // Extract the data values
-            let values = variables.values;
-            let parts = values.split(" ");
+            // let values = variables.values;
+            // let parts = values.split(" ");
 
             // Convert data values to float
-            let ph = parseFloat(parts[0]);
-            let temperature = parseFloat(parts[1]);
-            let turbidity = parts[2];
-            let ammonia = parseFloat(parts[3]);
+            // let ph = parseFloat(parts[0]);
+            // let temperature = parseFloat(parts[1]);
+            // let turbidity = parts[2];
+            // let ammonia = parseFloat(parts[3]);
+
+            let ph = variables.pH;
+            let temperature = variables.Temp;
+            let turbidity = variables.Turbidity;
+            let ammonia = variables.Ammonia;            
 
             // Update the displayed values
             document.getElementById('var1').innerHTML = ph;
